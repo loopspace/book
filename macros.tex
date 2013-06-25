@@ -840,8 +840,48 @@
 %\RenewEnviron {tabular} [1] {}{}
 %\NewEnviron {figure} {}{}
 \NewEnviron {tikzpicture} [1][] {}{}
-\NewEnviron {mathpar} {} {}
-\NewEnviron {mathparpagebreakable} {} {}
+
+\DeclareDocumentEnvironment {mathpar} {}
+{
+  \mpbindings
+  \csname equation*\endcsname
+}
+{
+  \csname endequation*\endcsname
+}
+
+\DeclareDocumentEnvironment {mathparpagebreakable} {}
+{
+  \mpbindings
+  \csname equation*\endcsname
+}
+{
+  \csname endequation*\endcsname
+}
+
+\def\mpbindings{
+  \let\and=\qquad
+  \let\\=\qquad
+}
+
+\def\mpgetlabel right=#1\STOP{%
+  \def\mplabel{#1}}
+
+\DeclareDocumentCommand \inferrule {s o m m}
+{
+  {
+    \mpbindings
+    \IfValueTF{#2}
+    {
+      \mpgetlabel#2\STOP
+      \frac{#3}{#4}\text{\mplabel}
+    }
+    {
+      \frac{#3}{#4}
+    }
+  }
+}
+
 \def\tag#1{}
 \let\notag\relax
 
@@ -867,10 +907,6 @@
 
 \DeclareDocumentCommand \addlinespace {o} {}
 
-\DeclareDocumentCommand \inferrule {s o m m}
-{
-  \frac{#1}{#2}
-}
 
 % Local Variables:
 % mode: latex
