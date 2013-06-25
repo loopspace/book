@@ -832,13 +832,13 @@
 \let\vcentcolon=\colon
 
 \usepackage{environ}
-\NewEnviron {table} [1][] {}{}
+%\NewEnviron {table} [1][] {}{}
 \makeatletter
 \let\env@tabular@save@env=\@empty
 \let\env@tabular@process=\@empty
 \makeatother
-\RenewEnviron {tabular} [1] {}{}
-\NewEnviron {figure} {}{}
+%\RenewEnviron {tabular} [1] {}{}
+%\NewEnviron {figure} {}{}
 \NewEnviron {tikzpicture} [1][] {}{}
 \NewEnviron {mathpar} {} {}
 \NewEnviron {mathparpagebreakable} {} {}
@@ -856,6 +856,21 @@
 \let\twocellhead\relax
 
 \DeclareDocumentCommand \titleformat {m o m m m m}
+
+\let\OPTsmalltable=\relax
+
+\let\centering=\relax
+
+\def\colorbox#1#2{\swallowhbox#2}
+\def\swallowhbox \hbox to 20pt{}
+\def\ding#1{\hexentity{2713}}
+
+\DeclareDocumentCommand \addlinespace {o} {}
+
+\DeclareDocumentCommand \inferrule {s o m m}
+{
+  \frac{#1}{#2}
+}
 
 % Local Variables:
 % mode: latex
