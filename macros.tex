@@ -832,13 +832,6 @@
 \let\vcentcolon=\colon
 
 \usepackage{environ}
-%\NewEnviron {table} [1][] {}{}
-\makeatletter
-\let\env@tabular@save@env=\@empty
-\let\env@tabular@process=\@empty
-\makeatother
-%\RenewEnviron {tabular} [1] {}{}
-%\NewEnviron {figure} {}{}
 \NewEnviron {tikzpicture} [1][] {}{}
 
 \DeclareDocumentEnvironment {mathpar} {}
@@ -882,7 +875,7 @@
   }
 }
 
-\def\tag#1{}
+\def\tag#1{\qquad \text{#1}}
 \let\notag\relax
 
 \NewDocumentCommand \xymatrix {l m} {{}}
@@ -907,6 +900,8 @@
 
 \DeclareDocumentCommand \addlinespace {o} {}
 
+\makeatother
+\endinput
 
 % Local Variables:
 % mode: latex
