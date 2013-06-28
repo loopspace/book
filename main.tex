@@ -1,5 +1,5 @@
-%\nonstopmode
-\errorstopmode
+\nonstopmode
+%\errorstopmode
 % THIS IS NOT THE FILE YOU SHOULD PROCESS. IT IS THE "MAIN" FILE,
 % BUT IT GETS INCLUDED BY ONE OF THE hott-xxx.tex FILES. THOSE ARE
 % THE MAIN ONES.
@@ -37,12 +37,117 @@
 }
 
 
+
 \addcss+math {font-family: serif, STIXGeneral, STIXIntegral;}+
 \addcss+.footnote_tgt {vertical-align: super; margin-right: 1em; font-size: 80%;}+
 \addcss+.footnote_src {vertical-align: super; margin-right: 1em; font-size: 80%;}+
 \addcss+.footnote_tgt:before {content: "\021a9"}+
 \addcss+[mathvariant="sans-serif"] {font-family: sans-serif;}+
-%\includeonly{formal}
+
+\addcss+.eqnnumber {float: right;}+
+\addcss+.eqnnumber:before {content: "(";}+
+\addcss+.eqnnumber:after {content: ")";}+
+\addcss+.alignnumber:before {content: "(";}+
+\addcss+.alignnumber:after {content: ")";}+
+\addcss+.alignnumber_row {vertical-align: middle;}+
+\addcss+table.align {width: 100%;}+
+\addcss+table.align > tr {vertical-align: top;}+
+\addcss+table.align td.label {width: 2em;}+
+
+  \addcss+
+  body {
+    max-width: 800px;
+    }
+  .gentheorem {
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: .5em 1em;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #888;
+    border-radius: 7px;
+    }
+  .proof {
+    margin-left: 3%;
+    margin-right: 3%;
+    padding: .5em 1em;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #888;
+    border-radius: 7px;
+  }
+  .proof .title {
+    font-weight: bold;
+    font-style: normal;
+  }
+  li.listlabel {
+    list-style: none;
+  }
+  span.listlabel {
+    float: left;
+    margin-left: -10em;
+    margin-right: 1em;
+    width: 9em;
+    text-align: right;
+    }
+  ol.bibliography {
+    margin-left: 4em;
+  }
+  math[display="inline"] {
+    white-space: nowrap;
+  }
+  mtd[columnalign="right"] {
+    text-align: right;
+  }
+  mtd[columnalign="left"] {
+    text-align: left;
+  }
+  math {
+    font-weight: normal;
+    font-style: normal;
+  }
+  h1 {
+    page-break-before: always;
+  }
++
+
+\addjavascript@
+function moveEqNums() {
+  var eqns = document.getElementsByClassName('alignnumber');
+  var eqn;
+  var tr;
+  var label;
+  var re = /(.*)_label/;
+  var result;
+  var top;
+  for (var i = 0; i < eqns.length; i++) {
+    eqn = eqns[i];
+    tr = eqn.parentNode.parentNode;
+    result = re.exec(eqn.id);
+    if (result) {
+      label = document.getElementById(result[1]);
+      height = getMRowHeight(label);
+      tr.style.height = height + 'px';
+    }
+  }
+}
+
+function getMRowHeight(ele) {
+  var ht = 0;
+
+  while (ele.tagName != "mtr") {
+    ele = ele.parentNode;
+  }
+  ht = ele.scrollHeight;
+
+  return ht;
+}
+
+window.onload = moveEqNums;
+@
+
+
+%\includeonly{introduction}
 \begin{document}
 \itexSetCatcodes
 
