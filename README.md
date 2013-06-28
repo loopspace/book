@@ -4,25 +4,43 @@ This is the ePub fork of the *Homotopy Type Theory* book.
 
 To create an ePub from this, you need the following:
 
-* The `internet` class.  This can
-be obtained from
+* The `internet` class.  This can be obtained from
 [LaTeXporter](http://www.math.ntnu.no/~stacey/code/LaTeXporter).  This
 is a LaTeX class designed for converting LaTeX to various other text
 formats.
+
+  The source is actually a `bzr` repository.  Once branched, you need
+  to ensure that all of the necessary files are linked in somewhere
+  that TeX can find them.  Best is to symlink them into your personal
+  `texmf` tree.  Note that anything of the form `_test.tex` does not
+  need to be linked.
+
+  It is also necessary to generate the virtual fonts:
+
+  ```
+  vptovf textfont.vpl
+  vptovf mathfont.vpl
+  ```
+  The resulting `.tfm` and `.vf` files also need to be put where TeX
+  can find them.
 * Perl.  Assembling an ePub is a complicated business so there is a
   perl script which does the heavy lifting.
 * itex2MML.  At present, an external program is used to produce the
   MathML segments.  This is itex2MML.  You need the version
   [with perl support](http://www.math.ntnu.no/~stacey/code/itex).
   This needs to be compiled before use.  The compliation steps are:
-  
-	  make perl
-	  make install_perl
+
+  ```  
+  make perl
+  make install_perl
+  ```
 
   The latter step needs root privileges.  If you don't have them, work
   out where perl looks for its modules in your home directory:
   
-	  perl -le 'print join(":",@INC)'
+  ```
+  perl -le 'print join(":",@INC)'
+  ```
 	  
   Then copy the files `itex2MML.bundle`, `itex2MML.pm`, and
   `ItexToMML.pm` into that directory.
