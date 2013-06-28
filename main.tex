@@ -113,39 +113,24 @@
 
 \addjavascript@
 function moveEqNums() {
-  var eqns = document.getElementsByClassName('alignnumber');
-  var eqn;
-  var tr;
-  var label;
-  var re = /(.*)_label/;
-  var result;
-  var top;
-  for (var i = 0; i < eqns.length; i++) {
-    eqn = eqns[i];
-    tr = eqn.parentNode.parentNode;
-    result = re.exec(eqn.id);
-    if (result) {
-      label = document.getElementById(result[1]);
-      height = getMRowHeight(label);
-      tr.style.height = height + 'px';
+  var aligns = document.getElementsByClassName('align');
+  for (var i = 0; i < aligns.length; i++) {
+    var align = aligns[i];
+    if (align.tagName == 'table')
+    {
+      var math = align.firstChild.childNodes[1].firstChild.childNodes[1].firstChild.firstChild.children;
+var label = align.firstChild.childNodes[2].firstChild.children;
+      for (var j = 0; j < math.length; j++) {
+        label[j].style.height = math[j].scrollHeight + 'px';
+      }
     }
   }
-}
-
-function getMRowHeight(ele) {
-  var ht = 0;
-
-  while (ele.tagName != "mtr") {
-    ele = ele.parentNode;
-  }
-  ht = ele.scrollHeight;
-
-  return ht;
 }
 
 window.onload = moveEqNums;
 @
 
+\loadcss{mathml}
 
 %\includeonly{introduction}
 \begin{document}
