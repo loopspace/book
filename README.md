@@ -50,6 +50,11 @@ formats.
   present, the location of this file is coded into the
   `create_epub.pl` script from the `internet` class.  It is obvious
   which line to change.
+* The STIX fonts.  The epub needs them embedded to ensure that the
+  mathematical glyphs are rendered.  If the files are in the main
+  directory then the `create_epub.pl` script will copy them in to the
+  epub.  The list can be gleaned from `main.tex`.  For each filename,
+  `kpsewhich <filename>` will locate it if it is in your TeX installation.
 
 Once everything is in place, run `pdflatex main.tex` to check that it
 all works.  Then `create_epub.pl main.tex` to create the ePub.  At
