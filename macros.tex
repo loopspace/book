@@ -11,7 +11,7 @@
 \newcommand{\jdeq}{\equiv}      % An equality judgment
 \let\judgeq\jdeq
 %\newcommand{\defeq}{\coloneqq}  % An equality currently being defined
-\newcommand{\defeq}{\colon\equiv}  % A judgmental equality currently being defined
+\newcommand{\defeq}{\mathrel{\colon\equiv}}  % A judgmental equality currently being defined
 
 %%% Term being defined
 \newcommand{\define}[1]{\textbf{#1}}
@@ -846,10 +846,10 @@
 \DeclareDocumentEnvironment {mathparpagebreakable} {}
 {
   \mpbindings
-  \csname equation*\endcsname
+  \csname gather*\endcsname
 }
 {
-  \csname endequation*\endcsname
+  \csname endgather*\endcsname
 }
 
 \def\mpbindings{
@@ -878,7 +878,7 @@
 \def\tag#1{\qquad \text{#1}}
 \let\notag\relax
 
-\NewDocumentCommand \xymatrix {l m} {{}}
+\NewDocumentCommand \xymatrix {l m} {\itexgroup{}}
 \let\vcenter=\relax
 \itexRestoreCatcodes
 
