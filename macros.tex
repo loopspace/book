@@ -11,7 +11,7 @@
 \newcommand{\jdeq}{\equiv}      % An equality judgment
 \let\judgeq\jdeq
 %\newcommand{\defeq}{\coloneqq}  % An equality currently being defined
-\newcommand{\defeq}{\mathrel{\colon\equiv}}  % A judgmental equality currently being defined
+\newcommand{\defeq}{\colon\equiv}  % A judgmental equality currently being defined
 
 %%% Term being defined
 \newcommand{\define}[1]{\textbf{#1}}
@@ -828,7 +828,7 @@
 
 \let\narrowbreak\relax
 \let\eqref=\ref
-\let\ocircle=\circ
+\let\ocircle=\odot
 \let\vcentcolon=\colon
 
 \usepackage{environ}
@@ -899,6 +899,16 @@
 \def\ding#1{\hexentity{2713}}
 
 \DeclareDocumentCommand \addlinespace {o} {}
+
+\renewcommand{\defeq}{\itexmathrel{\hexentity{02236}\hexentity{02261}}}
+
+\let\OPTindexfont=\relax
+\crefname{indexanchor}{}{}
+
+\let\itexmathbin=\mathbin
+\let\itexmathrel=\mathrel
+\def\mathbin#1{\:{#1}\:}
+\def\mathrel#1{\;{#1}\;}
 
 \makeatother
 \endinput

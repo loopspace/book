@@ -1,11 +1,11 @@
-\nonstopmode
-%\errorstopmode
+%\nonstopmode
+\errorstopmode
 % THIS IS NOT THE FILE YOU SHOULD PROCESS. IT IS THE "MAIN" FILE,
 % BUT IT GETS INCLUDED BY ONE OF THE hott-xxx.tex FILES. THOSE ARE
 % THE MAIN ONES.
 
 % DOCUMENT CLASS
-\documentclass[epub={split at=section},text,itex,class=book]{internet}
+\documentclass[epub={split at=subsection},text,itex,class=book]{internet}
 
 \usepackage{xspace}
 \usepackage{hyperref}
@@ -15,6 +15,9 @@
 \usepackage{braket}
 
 \input{macros}
+
+\usepackage{makeidx}
+\makeindex
 
 \title{Homotopy Type Theory: Univalent Foundations of Mathematics}
 \author{The Univalent Foundations Program}
@@ -36,79 +39,113 @@
   format = opentype
 }
 
-
-
-\addcss+math {font-family: serif, STIXGeneral, STIXIntegral;}+
-\addcss+.footnote_tgt {vertical-align: super; margin-right: 1em; font-size: 80%;}+
-\addcss+.footnote_src {vertical-align: super; margin-right: 1em; font-size: 80%;}+
-\addcss+.footnote_tgt:before {content: "\021a9"}+
-\addcss+[mathvariant="sans-serif"] {font-family: sans-serif;}+
-
-\addcss+.eqnnumber {float: right;}+
-\addcss+.eqnnumber:before {content: "(";}+
-\addcss+.eqnnumber:after {content: ")";}+
-\addcss+.alignnumber:before {content: "(";}+
-\addcss+.alignnumber:after {content: ")";}+
-\addcss+.alignnumber_row {vertical-align: middle;}+
-\addcss+table.align {width: 100%;}+
-\addcss+table.align > tr {vertical-align: top;}+
-\addcss+table.align td.label {width: 2em;}+
-
-  \addcss+
-  body {
-    max-width: 800px;
-    }
-  .gentheorem {
-    margin-left: 5%;
-    margin-right: 5%;
-    padding: .5em 1em;
-    border-width: 2px;
-    border-style: solid;
-    border-color: #888;
-    border-radius: 7px;
-    }
-  .proof {
-    margin-left: 3%;
-    margin-right: 3%;
-    padding: .5em 1em;
-    border-width: 2px;
-    border-style: solid;
-    border-color: #888;
-    border-radius: 7px;
-  }
-  .proof .title {
-    font-weight: bold;
+\addcss+
+body {
+  max-width: 800px;
+  font-family: Palatino, serif;
+  font-size: 90%;
+  line-height: 2;
+}
+math {
+  font-family: STIXGeneral, STIXIntegral, serif;
+  font-weight: normal;
+  font-style: normal;
+}
+.index ul {
+  line-height: 1.2;
+}
+.index ul p {
+  margin: 0;
+}
+.footnote_tgt {
+  vertical-align: super;
+  margin-right: 1em;
+  font-size: 80%;
+}
+.footnote_src {
+  vertical-align: super;
+  margin-right: 1em;
+  font-size: 80%;
+}
+.footnote_tgt:before {
+  content: "\021a9";
+}
+span.eqnnumber {
+  float: right;
+}
+span.eqnnumber:before {
+  content: "(";
+}
+span.eqnnumber:after {
+  content: ")";
+}
+table.align {
+  width: 100%;
+}
+table.align > tr {
+  vertical-align: top;
+}
+table.align td.label {
+  width: 2em;
+}
+.symbols table {
+  width: 90%;
+  line-height: 1.2;
+  vertical-align: top;
+}
+.symbols table tr td:first-child {
+  width: 20%;
+}
+.gentheorem {
+  margin-left: 5%;
+  margin-right: 5%;
+  padding: .5em 1em;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #888;
+  border-radius: 7px;
+}
+.proof {
+  margin-left: 3%;
+  margin-right: 3%;
+  padding: .5em 1em;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #888;
+  border-radius: 7px;
+}
+.proof .title {
+  font-weight: bold;
     font-style: normal;
-  }
-  li.listlabel {
-    list-style: none;
-  }
-  span.listlabel {
-    float: left;
-    margin-left: -10em;
-    margin-right: 1em;
-    width: 9em;
-    text-align: right;
-    }
-  ol.bibliography {
-    margin-left: 4em;
-  }
-  math[display="inline"] {
-    white-space: nowrap;
-  }
-  mtd[columnalign="right"] {
-    text-align: right;
-  }
-  mtd[columnalign="left"] {
-    text-align: left;
-  }
-  math {
-    font-weight: normal;
-    font-style: normal;
-  }
-  h1 {
-    page-break-before: always;
-  }
+}
+li.listlabel {
+  list-style: none;
+}
+span.listlabel {
+  float: left;
+  margin-left: -10em;
+  margin-right: 1em;
+  width: 9em;
+  text-align: right;
+}
+ol.bibliography {
+  margin-left: 4em;
+}
+math[display="inline"] {
+  white-space: nowrap;
+}
+[mathvariant="sans-serif"] {
+  font-family: sans-serif;
+}
+mtd[columnalign="right"] {
+  text-align: right;
+}
+mtd[columnalign="left"] {
+  text-align: left;
+}
+h1 {
+  page-break-before: always;
+}
 +
 
 \addjavascript@
@@ -132,18 +169,16 @@ window.onload = moveEqNums;
 
 \loadcss{mathml}
 
-%\includeonly{introduction}
+%\includeonly{reals}
+
 \begin{document}
 \itexSetCatcodes
-
 % NB: This does not actually appear anywhere because we have
 % a custom title page.
-
 
 %\include{front} %%% Title page and copyright
 
 %\include{preface}
-
 
 %\mainmatter % Turn on roman page numbers and numbered chapters
 
@@ -211,7 +246,7 @@ window.onload = moveEqNums;
 
 %%%% Index of symbols
 
-%\include{symbols}
+\include{symbols}
 
 %\cleartooddpage[\thispagestyle{empty}]
 
@@ -265,13 +300,14 @@ window.onload = moveEqNums;
 \indexsee{countable axiom of choice}{axiom of choice, countable}
 
 % tell the index to get itself into the table of contents
+\epubNewSegment[section]
 \phantomsection % black magic to get TOC to point to correct page
 \addcontentsline{toc}{part}{Index}
 \markboth{}{\textsc{Index}}
 \renewcommand{\markboth}[2]{}
 {%\OPTindexfont
 %\setlength{\columnsep}{\OPTindexcolumnsep}
-%\printindex
+\printindex
 }
 
 % The back cover
