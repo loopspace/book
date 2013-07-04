@@ -541,7 +541,7 @@ However, unlike in set theory, where we define ordered pairs to be particular se
   \item how to form new types of this kind, via \define{formation rules}.
     \indexdef{formation rule}%
     \index{rule!formation}%  
-(For example, we can form the function type $A \to B$ when $A$ is a type and when $B$ is a type. We can form the dependent function type $\prd{x:A} B$ when $A$ is a type and $B(x)$ is a type for $x:A$.)
+(For example, we can form the function type $A \to B$ when $A$ is a type and when $B$ is a type. We can form the dependent function type $\prd{x:A} B(x)$ when $A$ is a type and $B(x)$ is a type for $x:A$.)
 
   \item how to construct elements of that type.  
     These are called the type's \define{constructors} or \define{introduction rules}.
@@ -821,7 +821,7 @@ To verify that this is well-typed, note that if $g:\prd{x:A} \sm{y :B} R(x,y)$, 
 \lamu{x:A} \snd(g(x)) &: \tprd{x:A} R(x,\fst(g(x))).
 \end{align*}
 Moreover, the type $\prd{x:A} R(x,\fst(g(x)))$ is the result of substituting the function $\lamu{x:A} \fst(g(x))$ for $f$ in the family being summed over in the co\-do\-main of \ac:
-\[ \tprd{x:A} R(x,\fst(f(x))) \jdeq
+\[ \tprd{x:A} R(x,\fst(g(x))) \jdeq
 \Parens{\lamu{f:A\to B} \tprd{x:A} R(x,f(x))}\big(\lamu{x:A} \fst(g(x))\big). \]
 Thus, we have
 \[ \Parens{\lamu{x:A} \fst(g(x)),\, \lamu{x:A} \snd(g(x))} : \tsm{f:A\to B} \tprd{x:A} R(x,f(x))\]
@@ -1351,7 +1351,9 @@ This introduces unnamed variables
 \index{variable}%
 (hypotheses)
 \index{hypothesis}%
-$x$ and $y$ of types $A\to\emptyt$ and $B\to\emptyt$. At this point our partial definition of an element of~\eqref{eq:tautology2} can be written as
+of types $A\to\emptyt$ and $B\to\emptyt$.
+When translating into type theory, we have to give these variables names; let us call them $x$ and $y$.
+At this point our partial definition of an element of~\eqref{eq:tautology2} can be written as
 \[ f((x,y)) \defeq\; \Box\;:A+B\to\emptyt \]
 with a ``hole'' $\Box$ of type $A+B\to\emptyt$ indicating what remains to be done.
 (We could equivalently write $f \defeq \rec{(A\to\emptyt)\times (B\to\emptyt)}(A+B\to\emptyt,\lam{x}{y} \Box)$, using the recursor instead of pattern matching.)
@@ -1551,7 +1553,7 @@ called \define{reflexivity},
 \indexdef{reflexivity!of equality}%
 which says that every element of $A$ is equal to itself (in a specified way).  We regard $\refl{a}$ as being the
 constant path\indexdef{path!constant}\indexsee{loop!constant}{path, constant}
-at the point $a$
+at the point $a$.
 
 In particular, this means that if $a$ and $b$ are \emph{judgmentally} equal, $a\jdeq b$, then we also have an element $\refl{a} : \id[A]{a}{b}$.
 This is well-typed because $a\jdeq b$ means that also the type $\id[A]{a}{b}$ is judgmentally equal to $\id[A]{a}{a}$, which is the type of $\refl{a}$.
@@ -1899,14 +1901,14 @@ The fact that Martin-L\"of's rule implies Paulin-Mohring's was proved by Streich
   \emph{(This requires concepts from \autoref{cha:basics}.)}
 \end{ex}
 
-\begin{ex}
+\begin{ex}\label{ex:iterator}
 \index{iterator!for natural numbers}
 Assuming as given only the \emph{iterator} for natural numbers
 \[\ite : \prd{C:\UU} C \to (C \to C) \to \nat \to C \]
 with the defining equations
 \begin{align*}
 \ite(C,c_0,c_s,0)  &\defeq c_0, \\
-\ite(C,c_0,c_s,\suc(n)) &\defeq c_s(\ite(C,C_0,c_s,n))
+\ite(C,c_0,c_s,\suc(n)) &\defeq c_s(\ite(C,c_0,c_s,n))
 \end{align*}
 derive the recursor $\rec{\nat}$.
 \end{ex}
@@ -1943,7 +1945,7 @@ Give an alternative derivation of $\indidb{A}$ from $\indid{A}$ which avoids the
   Show that the Ackermann function $\ack : \nat \to \nat \to \nat$ is definable using only $\rec{\nat}$ satisfying the following equations:
   \begin{align*}
     \ack(0,n) &\jdeq \suc(n), \\
-    \ack(\suc(m),0) &\jdeq 1, \\
+    \ack(\suc(m),0) &\jdeq \ack(m,1), \\
     \ack(\suc(m),\suc(n)) &\jdeq \ack(m,\ack(\suc(m),n)).
   \end{align*}
 \end{ex}
